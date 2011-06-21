@@ -1,0 +1,91 @@
+// Place all the styles related to the Problems controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.problems {
+  // Place scoped styles here
+
+  background: #fff url(bg-grid.png) repeat top left;
+  color: #444;
+
+  div.right-box {
+    width: 260px;
+    border: 3px inset #999;
+    padding: 4px;
+    position: fixed;
+    right: 0;
+    top: 0;    
+    p {
+      font-family: "Reenie Beanie", "Comic Sans", "MS Comic Sans", "Tahoma", sans-serif;
+    }
+
+    label, button {
+      font-family: "Reenie Beanie", "Comic Sans", "MS Comic Sans", "Tahoma", sans-serif;
+      font-size: larger;
+    }
+    
+    button.advance_problem {
+      font-size: xx-large;
+      margin: 1em auto;
+      padding: 1em;
+      display: block;
+    }
+  }
+
+  #dialog, #done {
+    display: none;
+  }
+
+  #prompt, #done {
+    p {font-size: x-large;}
+  }
+
+  button.thumbs_up {
+    background: transparent url(thumbs-up.png) no-repeat top left;
+    background-size: 1em;
+    width: 1.5em;
+    height: 1.5em;
+  }
+  button.thumbs_down {
+    background: transparent url(thumbs-down.png) no-repeat top left;
+    background-size: 1em;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  #dialog {
+    p {
+      font-size: x-large;
+      margin: 0;
+    }
+
+    p.guidance {
+      font-size: medium;
+    }
+
+    .dialog_section {
+      margin: 0 0 1em 0;
+    }
+
+    textarea {
+      width: 250px;
+      height: 80px;
+    }
+
+    .supplement {
+      display: none;
+      margin: .4em 0;
+      padding: 0;
+      height: 15em;
+    }
+
+    p#prior_explanation {
+      background-color: #BFB;
+      padding: 4px;
+      font: small "Arial", Helvetica, Verdana, sans-serif;
+    }
+
+    #continue {text-align: center; margin: 1em 0 0 0;}
+    button.advance_step {font-size: x-large; padding-top: 0.3em}
+  }
+}
