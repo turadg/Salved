@@ -1,7 +1,8 @@
 module ProblemsHelper
   
   def explanations_for_problem problem
-    ary = problem.problem_events.where(:name => 'explanation').group(:step, :ip_address, :id).order('created_at DESC')
+    # TODO only get latest from a user on a step. had it working but broke on Heroku's PostgreSQL
+    ary = problem.problem_events.where(:name => 'explanation')
     
     ary.inject({}) { |hash, obj|
       step = obj['step']
