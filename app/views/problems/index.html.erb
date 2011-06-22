@@ -2,21 +2,14 @@
 
 <table>
   <tr>
-    <th>Label</th>
+    <th>Problem (click to answer)</th>
     <th>Step count</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @problems.each do |problem| %>
   <tr>
-    <td><%= problem.label %></td>
+    <td><%= link_to problem.label, answer_problem_path(problem) %></td>
     <td><%= problem.step_count %></td>
-    <td><%= link_to 'Answer', answer_problem_path(problem) %></td>
-    <td><%= link_to 'Show', problem %></td>
-    <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-    <!-- <td><%= link_to 'Destroy', problem, confirm: 'Are you sure?', method: :delete %></td> -->
   </tr>
 <% end %>
 </table>
