@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Problem:</b>
+  <%= @problem_event.problem_id %>
+</p>
+
+<p>
+  <b>Step:</b>
+  <%= @problem_event.step %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @problem_event.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @problem_event.value %>
+</p>
+
+<p>
+  <b>Ip address:</b>
+  <%= @problem_event.ip_address %>
+</p>
+
+
+<%= link_to 'Edit', edit_problem_event_path(@problem_event) %> |
+<%= link_to 'Back', problem_events_path %>

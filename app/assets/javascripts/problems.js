@@ -32,8 +32,39 @@ function incrementExplanation() {
     $("#increment_explanation").removeAttr('disabled');
   }
 }
-    
+
+function recordEvent(name, value) {
+  // common: problem_id, currentStep
+  data = {'problem_event': {
+    'problem_id': problem_id,
+    'step': currentStep,
+    'name': name,
+    'value': value
+  }};
+  $.post('/problem_events', data);
+}    
+
 $(function () {  
+  
+  recordEvent('init', 'initialized');
+  
+  // record all button presses as id clicked
+  $('button').click(function() {
+    recordEvent(this.id, 'clicked');
+  });
+  // record change in any input
+  $('input').change(function() {
+    recordEvent(this.name, this.value);
+  });
+  $('textarea').blur(function() {
+    recordEvent(this.name, this.value);
+  });
+  
+  
+  
+  $('button.advance_problem').click(function() {
+    recordEvent('advance_problem', this.id);
+  });
   
   revealAndDiscuss = function(next_div) {
     $('#prompt').hide();
@@ -44,11 +75,13 @@ $(function () {
   $('#work_help').click(function() {revealAndDiscuss('#dialog');});
   $('#work_check').click(function() {revealAndDiscuss('#work-check');});
   $('button.record-check').click(function() {
+    recordEvent('record-check', this.id);
     $('#work-check').hide();
     $('#dialog').show();
   });
   
   $('button.show_prior').click(function () {
+    recordEvent('record-check', this.id);
     $('#write_explanation').hide();
     $('#read_explanations').show();
   });
@@ -67,7 +100,7 @@ $(function () {
     } else {
       $('#done').show();
     }
-  });      
+  });
 
   updateProblem(imageList, currentStep); // step 0, the problem statement
 });

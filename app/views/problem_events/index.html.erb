@@ -1,0 +1,27 @@
+<h1>Listing problem_events</h1>
+
+<table>
+  <tr>
+    <th>Problem</th>
+    <th>Step</th>
+    <th>Name</th>
+    <th>Value</th>
+    <th>IP Address</th>
+    <th>Time</th>
+  </tr>
+
+<% @problem_events.each do |problem_event| %>
+  <tr>
+    <td><%= problem_event.problem_id %></td>
+    <td><%= problem_event.step %></td>
+    <td><%= problem_event.name %></td>
+    <td><%= problem_event.value %></td>
+    <td><%= problem_event.ip_address %></td>
+    <td><%= problem_event.created_at %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Problem event', new_problem_event_path %>

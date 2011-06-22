@@ -1,4 +1,6 @@
 Salved::Application.routes.draw do
+  resources :problem_events
+
   resources :problems do
     member do
       get 'answer'

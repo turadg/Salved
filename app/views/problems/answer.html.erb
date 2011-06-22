@@ -1,6 +1,7 @@
 <script type="text/javascript" charset="utf-8">
   
 // author the interaction through data structures
+problem_id = '<%= @problem.id %>';
 question_dir = '<%= @problem.filesPath %>';
 stepCount = <%= @problem.step_count %>;
 var explanations = new Array(stepCount);
@@ -54,15 +55,15 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
         <p id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">private</label></p>
     
         <p>How good is your explanation?</p>
-        <button class="show_prior">Poor</button>
-        <button class="show_prior">Good</button>
-        <button class="show_prior">Very good</button>
+        <button class="show_prior" id="poor">Poor</button>
+        <button class="show_prior" id="good">Good</button>
+        <button class="show_prior" id="very_good">Very good</button>
       </div>
     
       <div id="read_explanations">
         <p id="prior_explanation">&lt;PRIOR EXPLANATION&gt;</p>
         <p class="guidance">Does this help you?
-          <button class="thumbs_up"></button><button class="thumbs_down"></button>
+          <button id="thumbs_up"></button><button id="thumbs_down"></button>
         </p>
         <div>
           <button id="increment_explanation">Show another</button>

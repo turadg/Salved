@@ -47,13 +47,13 @@ body.problems {
     display: none;
   }
 
-  button.thumbs_up {
+  button#thumbs_up {
     background: transparent url(thumbs-up.png) no-repeat top left;
     background-size: 1em;
     width: 1.5em;
     height: 1.5em;
   }
-  button.thumbs_down {
+  button#thumbs_down {
     background: transparent url(thumbs-down.png) no-repeat top left;
     background-size: 1em;
     width: 1.5em;
