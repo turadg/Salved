@@ -2,7 +2,7 @@
   
 // author the interaction through data structures
 question_dir = '<%= @problem.filesPath %>';
-stepCount = 4;
+stepCount = <%= @problem.step_count %>;
 var explanations = new Array(stepCount);
   
 explanations[1] = new Array("This has a triple bond and a pair of electrons per Phosphorus. This is because each Phosphorus has 5 valence electrons and shares 3 of those with the other so that they each have a happy 8.");
@@ -15,7 +15,7 @@ explanations[4] = new Array("the total energy in this equation is equal to bonds
 // set up env
 currentStep = 0;
 currentExplanation = 0;
-imageList = stepImages(question_dir, stepCount, extension=".gif");
+imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageType %>");
 
 </script>
 
@@ -28,75 +28,75 @@ imageList = stepImages(question_dir, stepCount, extension=".gif");
   </div>
   
   <div id="prompt" class="right-box">
-    <p>Try reaching a complete solution to the problem at left.</p>
-    <button id="work_finished" class="advance_problem">Finished it</button>
-    <button id="work_stuck" class="advance_problem">Got stuck</button>
-    <button id="work_lost" class="advance_problem">No idea</button>
+    <p>Try solving the problem at left on your paper.</p>
+    <p>When you click on either of these buttons, you'll see part of an expert's solution to the problem.</p>
+
+    <button id="work_check" class="advance_problem">Check my work</button>
+    <button id="work_help" class="advance_problem">Get help</button>
   </div>
   
+  <div id="work-check" class="right-box">
+    <p>At left is an expert's work.<br>Is your work right?</p>
 
-
-  <div id="done" class="right-box">
-    <p>All done.</p>
+    <button class="record-check" id="same">Yes and similar.</button><br>
+    <button class="record-check" id="different">Yes but different.</button><br>
+    <button class="record-check" id="partly">Partly right.</button><br>
+    <button class="record-check" id="not">Not at all.</button>
   </div>
   
   <div id="dialog" class="right-box">
     
-    <div id="check">
-      <div id="explain" class="dialog_section">
-        <p>Try to explain this step:</p>
+    <div id="explanations">
+      
+      <div id="write_explanation" class="dialog_section">
+        <p>Why did the expert do this?</p>
         <textarea name="explanation"></textarea>
+        <p id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">private</label></p>
+    
+        <p>How good is your explanation?</p>
+        <button class="show_prior">Poor</button>
+        <button class="show_prior">Good</button>
+        <button class="show_prior">Very good</button>
       </div>
-      
-      <div id="useful" class="dialog_section">
-        <p>How useful is your explanation?</p>
-        <input type="radio" name="useful" value="share" id="good_to_share">
-        <label for="good_to_share">Good enough to share</label><br>
-        <input type="radio" name="useful" value="me" id="good_for_me">
-        <label for="good_for_me">Good for me</label><br>
-        <input type="radio" name="useful" value="not" id="not_good">
-        <label for="not_good">Not good</label>
-      </div>      
-
-      <div id="match" class="dialog_section">
-        <p>Does your work match this?</p>
-        <input type="radio" name="match" value="yes" id="yes_match">
-        <label for="yes_match">Yes</label><br>
-        <input type="radio" name="match" value="no" id="no_match">
-        <label for="no_match">No</label><br>
-        <input type="radio" name="match" value="fine" id="fine_match">
-        <label for="fine_match">Mine's fine</label>
-        
-      </div>
-      
-      <div id="help_supplement" class="supplement dialog_section">
+    
+      <div id="read_explanations">
         <p id="prior_explanation">&lt;PRIOR EXPLANATION&gt;</p>
-        <p class="guidance">Is this helpful?</p>
-        <div>
+        <p class="guidance">Does this help you?
           <button class="thumbs_up"></button><button class="thumbs_down"></button>
-                <button id="increment_explanation">Show another</button>
-        </div>
-        
-        <p class="guidance">Try revising your explanation.</p>
-        
-        
-        <button id="step_stop_btn" class="advance_step">Hold off</button>
-        <button id="step_confused_btn" class="advance_step">Little confused</button>
-        
-      </div>
-
-      <div id="mine_supplement" class="supplement dialog_section">
-        <p>Why does yours also work?</p>
-        <textarea name="mine_explanation"></textarea>
-        
+        </p>
+        <div>
+          <button id="increment_explanation">Show another</button>
+          <button id="revise_explanation">Revise mine</button>
+          
+        </div>    
       </div>
       
-      <div id="continue" class="dialog_section">
-        <button id="step_understood_btn" class="advance_step">I understand this</button>
-      </div>
+    </div>
+
+    <div id="understanding" class="dialog_section">
+      <p>Do you understand the uncovered work?</p>
+      <input type="checkbox" name="understand" id="understand"><label for="understand">I understand the expert's work.</label><br>
+      <input type="checkbox" name="differently" id="differently"><label for="differently">I would do it differently.</label><br>
+      <input type="checkbox" name="bookmark" id="bookmark"><label for="bookmark">Review this problem later.</label>
     </div>
     
+    <div id="continue" class="dialog_section">
+      <button id="step_understood_btn" class="advance_step">Continue</button>
+    </div>
+      
   </div>
 
 
+  <div id="done" class="right-box">
+    <p>All done.</p>
+    
+    <p>Your stats:</p>
+    <div id="post_question_stats" style="border: dashed black 3px; background-color: lightGrey; height: 10em">
+    </div>
+    
+    <button>Try another similar question.</button>
+    <br>
+    <%= link_to 'Back to list of problems', problems_path %>
+  </div>
+  
 </div>

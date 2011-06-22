@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 body.problems {
   // Place scoped styles here
 
@@ -17,27 +18,25 @@ body.problems {
     top: 0;    
     p {
       font-family: "Reenie Beanie", "Comic Sans", "MS Comic Sans", "Tahoma", sans-serif;
+      font-size: x-large;
     }
 
     label, button {
       font-family: "Reenie Beanie", "Comic Sans", "MS Comic Sans", "Tahoma", sans-serif;
-      font-size: larger;
+      font-size: large;
     }
     
-    button.advance_problem {
+    button.advance_problem, button.record-check {
       font-size: xx-large;
-      margin: 1em auto;
-      padding: 1em;
+      padding: .7em .4em;
       display: block;
+      margin: .3em auto;
     }
   }
 
-  #dialog, #done {
+  // hidden at start
+  #work-check, #dialog, #done {
     display: none;
-  }
-
-  #prompt, #done {
-    p {font-size: x-large;}
   }
 
   button.thumbs_up {
@@ -66,11 +65,40 @@ body.problems {
     .dialog_section {
       margin: 0 0 1em 0;
     }
+    
+    #explanations {
+      
+      height: 240px;
+      border-bottom: dotted gray;
+      
+      #privacy_choice {
+        text-align: right; font-size: medium;
+        label {
+          font-weight: normal;
+        }
+      }
+
+      
+    }
+    
+    #understanding {
+      p {
+        margin: 0.5em auto;
+      }
+      
+      label {
+        font-weight: normal;
+        font-size: large;
+      }
+      
+    }
 
     textarea {
       width: 250px;
       height: 80px;
     }
+    
+    button {font-size: x-large;}
 
     .supplement {
       display: none;

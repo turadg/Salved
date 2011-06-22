@@ -20,6 +20,10 @@
     <%= f.text_field :filesPath %>
   </div>
   <div class="field">
+    <%= f.label :imageType %><br />
+    <%= f.select :imageType, [['GIF','.gif'],['PNG','.png']] %>
+  </div>
+  <div class="field">
     <%= f.label :step_count %><br />
     <%= f.number_field :step_count %>
   </div>

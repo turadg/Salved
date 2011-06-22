@@ -1,5 +1,8 @@
 source 'http://rubygems.org'
 
+# for Heroku problems
+gem 'rake', '0.8.7'
+
 gem 'rails', '3.1.0.rc4'
 
 # Bundle edge Rails instead:

@@ -15,9 +15,11 @@ function updateProblem(imageList, currentStep) {
   
   // empty the fields
   $('textarea').val('');
-  $("input:radio").removeAttr("checked");
+  $("input:checkbox").removeAttr("checked");
   $('.supplement').hide();
-
+  $('#write_explanation').show();
+  $('#read_explanations').hide();    
+  
 }
 
 function incrementExplanation() {
@@ -31,33 +33,30 @@ function incrementExplanation() {
   }
 }
     
-$(function () {
+$(function () {  
   
-  $("input[name=match]").change(function () {
-
-    switch ($(this).val()) {
-      case "yes":
-        $('.supplement').hide();
-        break;
-      case "no":
-        $('#help_supplement').show();
-        $('#mine_supplement').hide();
-        break;
-      case "fine":
-        $('#help_supplement').hide();
-        $('#mine_supplement').show();
-        break;
-    }
-    
-  });
-  
-  revealAndDiscuss = function() {
+  revealAndDiscuss = function(next_div) {
     $('#prompt').hide();
-    $('#dialog').show();
+    $(next_div).show();
     currentStep += 1;
     updateProblem(imageList, currentStep);
   };  
-  $('button.advance_problem').click(revealAndDiscuss);
+  $('#work_help').click(function() {revealAndDiscuss('#dialog');});
+  $('#work_check').click(function() {revealAndDiscuss('#work-check');});
+  $('button.record-check').click(function() {
+    $('#work-check').hide();
+    $('#dialog').show();
+  });
+  
+  $('button.show_prior').click(function () {
+    $('#write_explanation').hide();
+    $('#read_explanations').show();
+  });
+  
+  $('button#revise_explanation').click(function() {
+    $('#write_explanation').show();
+    $('#read_explanations').hide();    
+  });
   
   $('#increment_explanation').click(incrementExplanation);
   
