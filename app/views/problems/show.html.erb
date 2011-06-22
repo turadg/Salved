@@ -10,6 +10,12 @@
   <%= @problem.filesPath %>
 </p>
 
+<p>
+  <b>Applicable explanations:</b>
+  <%= debug explanations_for_problem(@problem) %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>

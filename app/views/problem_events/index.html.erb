@@ -8,6 +8,7 @@
     <th>Value</th>
     <th>IP Address</th>
     <th>Time</th>
+    <th></th>
   </tr>
 
 <% @problem_events.each do |problem_event| %>
@@ -18,6 +19,7 @@
     <td><%= problem_event.value %></td>
     <td><%= problem_event.ip_address %></td>
     <td><%= problem_event.created_at %></td>
+    <td><%= link_to 'Show', problem_event %></td>
   </tr>
 <% end %>
 </table>

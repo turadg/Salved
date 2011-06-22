@@ -4,15 +4,8 @@
 problem_id = '<%= @problem.id %>';
 question_dir = '<%= @problem.filesPath %>';
 stepCount = <%= @problem.step_count %>;
-var explanations = new Array(stepCount);
+var explanations = <%= raw explanations_for_problem(@problem).to_json %>
   
-explanations[1] = new Array("This has a triple bond and a pair of electrons per Phosphorus. This is because each Phosphorus has 5 valence electrons and shares 3 of those with the other so that they each have a happy 8.");
-  
-explanations[2] = new Array("The expert is writing out an equation for the experiment, to show the heat released when the bonds are broken.");
-
-explanations[3] = new Array("there are 6 bonds contained in the P4 structure, these must be broken to get to the p2 structure", "they just describe what happens in this reaction using their words like a big boy.","It's showing that if you break P4, you are breaking six single bonds, and the total energy equals the bond energy of a single bond times six." );  
-explanations[4] = new Array("the total energy in this equation is equal to bonds formed - bonds broken.  The bonds formed (two triple bonds) minus bonds broken (six single bonds).  This total energy equals the heat released during the reaction (-200).")   
-
 // set up env
 currentStep = 0;
 currentExplanation = 0;
