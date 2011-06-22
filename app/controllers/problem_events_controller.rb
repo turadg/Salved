@@ -41,7 +41,7 @@ class ProblemEventsController < ApplicationController
   # POST /problem_events.json
   def create
     @problem_event = ProblemEvent.new(params[:problem_event])
-    @problem_event.ip_address = request.env['REMOTE_ADDR']
+    @problem_event.ip_address = request.remote_ip
 
     respond_to do |format|
       if @problem_event.save
