@@ -1,7 +1,7 @@
 module ProblemsHelper
   
   def explanations_for_problem problem
-    ary = problem.problem_events.where(:name => 'explanation').group(:step, :ip_address).order('created_at DESC')
+    ary = problem.problem_events.where(:name => 'explanation').group(:step, :ip_address, :id).order('created_at DESC')
     
     ary.inject({}) { |hash, obj|
       step = obj['step']
