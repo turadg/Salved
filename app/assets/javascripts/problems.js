@@ -44,22 +44,32 @@ function recordEvent(name, value) {
   $.post('/problem_events', data);
 }    
 
+var lastJustification = "";
+
 $(function () {  
   
   recordEvent('init', 'initialized');
   
   // record all button presses as id clicked
-  $('button').click(function() {
-    recordEvent(this.id, 'clicked');
-  });
+  $('button').click(function() {  recordEvent(this.id, 'clicked'); });
+  // record anchors too
+  $('a').click(function() {   recordEvent(this.id, 'clicked'); });
   // record change in any input
-  $('input').change(function() {
-    recordEvent(this.name, this.value);
+  $('input').change(function() {    recordEvent(this.name, this.value);  });
+  $('textarea').blur(function() {    recordEvent(this.name, this.value);  });
+
+  // save justification for explanation
+  $('textarea[name="justification"]').blur(function() {
+    lastJustification = this.value;
   });
-  $('textarea').blur(function() {
-    recordEvent(this.name, this.value);
+  // paste it in on request
+  $('#paste_justification').click(function () {
+    selector = 'textarea[name="explanation"]';
+    concatenated = $(selector).val() + " " + lastJustification;
+    $(selector).val(concatenated);
+    // and record new value
+    recordEvent('explanation', concatenated);
   });
-  
   
   
   $('button.advance_problem').click(function() {

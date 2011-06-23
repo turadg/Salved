@@ -5,7 +5,7 @@ problem_id = '<%= @problem.id %>';
 question_dir = '<%= @problem.filesPath %>';
 stepCount = <%= @problem.step_count %>;
 var explanations = <%= raw explanations_for_problem(@problem).to_json %>
-  
+
 // set up env
 currentStep = 0;
 currentExplanation = 0;
@@ -23,8 +23,8 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
   
   <div id="prompt" class="right-box">
     <p>Try solving the problem at left on your paper.</p>
-    <p>When you click on either of these buttons, you'll see part of an expert's solution to the problem.</p>
-
+    <textarea name="justification" placeholder="Why is your work correct?"></textarea>
+    
     <button id="work_check" class="advance_problem">Check my work</button>
     <button id="work_help" class="advance_problem">Get help</button>
   </div>
@@ -43,14 +43,19 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
     <div id="explanations">
       
       <div id="write_explanation" class="dialog_section">
-        <p>Why did the expert do this?</p>
-        <textarea name="explanation"></textarea>
-        <p id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">private</label></p>
-    
-        <p>How good is your explanation?</p>
-        <button class="show_prior" id="poor">Poor</button>
-        <button class="show_prior" id="good">Good</button>
-        <button class="show_prior" id="very_good">Very good</button>
+        <div id="why">
+          <p>Why did the expert do this?</p>
+          <textarea name="explanation"></textarea>
+          <a href="#" id="paste_justification">paste earlier justification</a>
+          <span id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">private</label></span>
+        </div>
+        &nbsp;
+        <div id="rate_own">
+          <p>How good is your explanation?</p>
+          <button class="show_prior" id="poor">Poor</button>
+          <button class="show_prior" id="good">Good</button>
+          <button class="show_prior" id="very_good">Very good</button>
+        </div>
       </div>
     
       <div id="read_explanations">

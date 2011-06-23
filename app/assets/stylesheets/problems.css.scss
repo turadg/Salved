@@ -52,6 +52,12 @@ body.problems {
       display: block;
       margin: .3em auto;
     }
+    
+    textarea {
+      width: 250px;
+      height: 80px;
+    }
+
   }
 
   // hidden at start
@@ -91,8 +97,20 @@ body.problems {
       height: 240px;
       border-bottom: dotted gray;
       
+      textarea {
+        margin-bottom: 0;
+      }
+      
+      #paste_justification {
+        font-size: x-small;
+        margin: 0;
+        padding: 0;
+      }
+      
       #privacy_choice {
-        text-align: right; font-size: medium;
+        font-size: medium;
+        float: right;
+        margin: 0;
         label {
           font-weight: normal;
         }
@@ -113,11 +131,6 @@ body.problems {
       
     }
 
-    textarea {
-      width: 250px;
-      height: 80px;
-    }
-    
     button {font-size: x-large;}
 
     .supplement {
