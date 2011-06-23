@@ -16,6 +16,18 @@ body.problems {
 
   background: #fff url(bg-grid.png) repeat top left;
   color: #444;
+
+  h1 {
+    text-align: center;
+  }
+
+  div#blurb {
+    background-color: #EEE;
+    margin: 1em auto;
+    padding: 1em;
+    border: solid black 4px;
+    width: 40em;
+  }
   
   div.right-box {
     width: 260px;
