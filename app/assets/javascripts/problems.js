@@ -46,7 +46,7 @@ function recordEvent(name, value) {
 
 var lastJustification = "";
 
-$(function () {  
+$(function () {
   
   recordEvent('init', 'initialized');
   
@@ -118,4 +118,18 @@ $(function () {
   });
 
   updateProblem(imageList, currentStep); // step 0, the problem statement
+  
+});
+
+
+$(document).ready(function()
+{
+  // Match all <A/> links with hovertip class and use title attr as content for a tooltip
+  $('.hovertip').qtip({
+    position: {
+       my: 'top left', 
+       at: 'bottom left'
+    }
+  }
+  );
 });

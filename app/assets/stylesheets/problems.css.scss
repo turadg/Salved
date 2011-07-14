@@ -177,4 +177,21 @@ body.problems {
       
   }
   
+  .hovertip-cue {
+    font: small sans-serif;
+    color: gray;
+    font-weight: bold;
+    text-decoration: none;
+  }
+ 
+  #done {
+    
+    #post_question_stats {
+      // border: dashed black 3px;
+      // background-color: lightGrey;
+      height: 20em;
+      h5 {  margin: 0;    }
+    }
+  }
+  
 }

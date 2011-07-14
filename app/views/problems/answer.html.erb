@@ -28,7 +28,7 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
   </div>
   
   <div id="prompt" class="right-box">
-    <p>Try solving the problem at left on your paper.</p>
+    <p class="hovertip" title="Can you do it?">Try solving the problem at left on your paper.  <a class="hovertip-cue">[?]</a></p>
     <textarea name="justification" placeholder="Why is your work correct?"></textarea>
     
     <button id="work_check" class="advance_problem">Check my work</button>
@@ -50,14 +50,14 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
       
       <div id="write_explanation" class="dialog_section">
         <div id="why">
-          <p>Why did the expert do this?</p>
+          <p class="hovertip" title="Explaining to yourself helps you learn better and can help your classmates too when you share.">Why did the expert do this? <a class="hovertip-cue" >[?]</a></p>
           <textarea name="explanation"></textarea>
           <a href="#" id="paste_justification">paste earlier justification</a>
           <span id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">don't share</label></span>
         </div>
         &nbsp;
         <div id="rate_own">
-          <p>How good is your explanation?</p>
+          <p class="hovertip" title="This helps you keep track of your explanations and improves the explanation pool.">How good is your explanation? <a class="hovertip-cue" >[?]</a></p>
           <button class="show_prior" id="poor">Poor</button>
           <button class="show_prior" id="good">Good</button>
           <button class="show_prior" id="very_good">Very good</button>
@@ -79,7 +79,7 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
     </div>
 
     <div id="understanding" class="dialog_section">
-      <p>Do you understand the uncovered work?</p>
+      <p class="hovertip" title="This helps you keep track of your progress and improves the explanation pool.">Do you understand the uncovered work? <a class="hovertip-cue">[?]</a></p>
       <button id="understand_not_btn" class="advance_step">Not yet</button>
       <button id="understand_yes_btn" class="advance_step">Yes</button>
       <!-- <input type="checkbox" name="understand" id="understand"><label for="understand">I understand the expert's work.</label><br>
@@ -97,7 +97,34 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
     <p>All done.</p>
     
     <p>Your stats:</p>
-    <div id="post_question_stats" style="border: dashed black 3px; background-color: lightGrey; height: 10em">
+    <div id="post_question_stats">
+      <h5>Work matched</h5>
+      <table>
+        <tr><td>Step 1</td><td>Yes</td></tr>
+        <tr><td>Step 2</td><td>Different</td></tr>
+        <tr><td>Step 3</td><td>Partly</td></tr>
+        <tr><td>Step 4</td><td>Yes</td></tr>
+        <tr style="border-top: 1px solid black"><td>Overall</td><td>50% yes</td></tr>
+      </table>
+      
+      <h5>Understood</h5>
+      <table>
+        <tr><td>Step 1</td><td>Yes</td></tr>
+        <tr><td>Step 2</td><td>Not yet</td></tr>
+        <tr><td>Step 3</td><td>Not yet</td></tr>
+        <tr><td>Step 4</td><td>Yes</td></tr>
+        <tr style="border-top: 1px solid black"><td>Overall</td><td>50% yes</td></tr>
+      </table>
+      
+      <h5>Time spent on this problem</h5>
+      <table>
+        <tr><td>Step 1</td><td>3 minutes</td></tr>
+        <tr><td>Step 2</td><td>1 minute</td></tr>
+        <tr><td>Step 3</td><td>2 minutes</td></tr>
+        <tr><td>Step 4</td><td>1 minute</td></tr>
+        <tr style="border-top: 1px solid black"><td>Overall</td><td>7 minutes</td></tr>
+      </table>
+      
     </div>
     
     <button>Try another similar question.</button>
