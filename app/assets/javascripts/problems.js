@@ -76,6 +76,11 @@ $(function () {
     recordEvent('advance_problem', this.id);
   });
   
+  $('.star-off').click(function() {
+    $(this).addClass("star-on");
+    recordEvent('star-on', this.id);
+  });
+  
   revealAndDiscuss = function(next_div) {
     $('#prompt').hide();
     $(next_div).show();

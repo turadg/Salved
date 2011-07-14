@@ -16,6 +16,12 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
 <div id="prototype">
   
   <div id="problem">
+
+
+    <div id="bookmark">
+      <a href="#" id="problem_bookmark" class="star-off" title="Star to review later">review</a>
+    </div>
+
     
     <img id="work_shown" src=""> <!-- set by Javascript -->
     
@@ -47,7 +53,7 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
           <p>Why did the expert do this?</p>
           <textarea name="explanation"></textarea>
           <a href="#" id="paste_justification">paste earlier justification</a>
-          <span id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">private</label></span>
+          <span id="privacy_choice"><input type="checkbox" name="private" id="private" value="check"><label for="private">don't share</label></span>
         </div>
         &nbsp;
         <div id="rate_own">
@@ -74,17 +80,18 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
 
     <div id="understanding" class="dialog_section">
       <p>Do you understand the uncovered work?</p>
-      <input type="checkbox" name="understand" id="understand"><label for="understand">I understand the expert's work.</label><br>
+      <button id="understand_not_btn" class="advance_step">Not yet</button>
+      <button id="understand_yes_btn" class="advance_step">Yes</button>
+      <!-- <input type="checkbox" name="understand" id="understand"><label for="understand">I understand the expert's work.</label><br>
       <input type="checkbox" name="differently" id="differently"><label for="differently">I would do it differently.</label><br>
       <input type="checkbox" name="bookmark" id="bookmark"><label for="bookmark">Review this problem later.</label>
     </div>
     
     <div id="continue" class="dialog_section">
-      <button id="step_understood_btn" class="advance_step">Continue</button>
+      <button id="step_understood_btn" class="advance_step">Continue</button> -->
     </div>
       
   </div>
-
 
   <div id="done" class="right-box">
     <p>All done.</p>

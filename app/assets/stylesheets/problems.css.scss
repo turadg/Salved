@@ -129,6 +129,12 @@ body.problems {
         font-size: large;
       }
       
+      button {
+        margin: .5em auto 0 .5em;
+        padding-top: 0.3em;
+        width: 6em;
+      }
+      
     }
 
     button {font-size: x-large;}
@@ -149,4 +155,26 @@ body.problems {
     #continue {text-align: center; margin: 1em 0 0 0;}
     button.advance_step {font-size: x-large; padding-top: 0.3em}
   }
+  
+  #bookmark {
+    position: absolute;
+    
+    .star-on, .star-off {
+      background-image:url("http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=3");
+      background-repeat:no-repeat;
+      overflow:hidden
+      }
+
+      .star-on,.star-off {
+        background-position:0px -265px;display:block;margin:0 auto;
+        width:33px; height:31px;
+        }
+      .star-off {cursor:pointer;}
+      
+    .star-on,.star-off {text-indent:-9999em; font-size:1px;}
+    .star-off { background-position: 0px -150px;}
+    .star-on { background-position: 0px -190px;}
+      
+  }
+  
 }
