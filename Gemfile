@@ -10,9 +10,9 @@ gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
 
 gem 'pg'
 
-# group :production do # Heroku
-#   gem 'therubyracer'
-# end
+group :production do # Heroku
+  gem 'therubyracer'
+end
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"
