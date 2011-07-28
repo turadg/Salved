@@ -109,12 +109,20 @@ $(function () {
   $('#increment_explanation').click(incrementExplanation);
   
   $('button.advance_step').click(function () {
+    // button recorded by earlier binding
     $('#dialog').hide();
     if (currentStep < stepCount) {
       $('#prompt').show();
     } else {
-      $('#done').show();
+      $('#almost-done').show();
     }
+  });
+
+  $('button.finish_problem').click(function () {
+    // button recorded by earlier binding
+    $('#dialog').hide();
+    $('#almost-done').hide();
+    $('#done').show();
   });
 
   updateProblem(imageList, currentStep); // step 0, the problem statement

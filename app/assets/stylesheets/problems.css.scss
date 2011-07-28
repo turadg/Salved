@@ -61,7 +61,7 @@ body.problems {
   }
 
   // hidden at start
-  #work-check, #dialog, #done {
+  #work-check, #dialog, #almost-done, #done {
     display: none;
   }
 
@@ -182,6 +182,17 @@ body.problems {
     color: gray;
     font-weight: bold;
     text-decoration: none;
+  }
+ 
+  #almost-done {
+    p,input {margin-bottom: 0.4em}
+
+    button {font-size: x-large;}
+    
+    textarea {
+      width: 250px;
+      height: 40px;
+    }    
   }
  
   #done {

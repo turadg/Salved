@@ -93,6 +93,28 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
       
   </div>
 
+  <div id="almost-done" class="right-box">
+    <p>Almost done…</p>
+    
+    <p>How hard was this problem?</p>
+    <input type="radio" name="difficulty_9pt" value="1" id="difficulty_1"><label for="difficulty_1">1: extremely easy</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_2"><label for="difficulty_2">2: very easy</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_3"><label for="difficulty_3">3: easy</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_4"><label for="difficulty_4">4: somewhat easy</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_5"><label for="difficulty_5">5: neither easy nor difficult</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_6"><label for="difficulty_6">6: somewhat difficult</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_7"><label for="difficulty_7">7: difficult</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_8"><label for="difficulty_8">8: very difficult</label><br>
+    <input type="radio" name="difficulty_9pt" value="2" id="difficulty_9"><label for="difficulty_9">9: extremeley difficult</label><br>
+    
+    <textarea name="notes_to_self" placeholder="Notes to yourself…"></textarea>
+    
+    <textarea name="notes_to_instructor" placeholder="Notes to the instructor…"></textarea>
+    
+    <button id="difficulty_rated_btn" class="finish_problem">Finish</button>
+    
+  </div>
+
   <div id="done" class="right-box">
     <p>All done.</p>
     
