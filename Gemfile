@@ -3,21 +3,19 @@ source 'http://rubygems.org'
 # for Heroku problems
 # gem 'rake', '0.8.7'
 
-# gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0.rc5'
 
-gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-1-stable'
-gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
+#gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-1-stable'
+#gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
 
 gem 'pg'
 
-group :production do # Heroku
-  gem 'therubyracer'
-end
-
 # Asset template engines
-gem 'sass-rails', "~> 3.1.0.rc"
-gem 'coffee-script'
-gem 'uglifier'
+group :assets do
+  gem 'sass-rails', "~> 3.1.0.rc"
+  gem 'coffee-script'
+  gem 'uglifier'
+end
 
 gem 'jquery-rails'
 
