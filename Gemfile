@@ -28,3 +28,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+group :test, :development do
+  gem 'rspec-rails', '~> 2.6'
+  gem 'webrat'
+end
