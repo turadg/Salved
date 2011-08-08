@@ -38,6 +38,7 @@ GEM
       execjs
     coffee-script-source (1.1.1)
     diff-lcs (1.1.2)
+    ejs (1.0.0)
     erubis (2.7.0)
     execjs (1.2.4)
       multi_json (~> 1.0)
@@ -72,6 +73,10 @@ GEM
       activesupport (= 3.1.0.rc5)
       bundler (~> 1.0)
       railties (= 3.1.0.rc5)
+    rails-backbone (0.5.2)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      rails (~> 3.1.0.rc5)
     railties (3.1.0.rc5)
       actionpack (= 3.1.0.rc5)
       activesupport (= 3.1.0.rc5)
@@ -126,6 +131,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.1.0.rc5)
+  rails-backbone
   rspec-rails (~> 2.6)
   sass-rails (~> 3.1.0.rc)
   uglifier
