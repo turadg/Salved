@@ -1,0 +1,33 @@
+<%= form_for(@elaboration) do |f| %>
+  <% if @elaboration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@elaboration.errors.count, "error") %> prohibited this elaboration from being saved:</h2>
+
+      <ul>
+      <% @elaboration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :difficulty %><br />
+    <%= f.number_field :difficulty %>
+  </div>
+  <div class="field">
+    <%= f.label :note_to_self %><br />
+    <%= f.text_area :note_to_self %>
+  </div>
+  <div class="field">
+    <%= f.label :note_to_instructor %><br />
+    <%= f.text_area :note_to_instructor %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

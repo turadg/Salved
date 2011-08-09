@@ -41,13 +41,14 @@ body.problems {
       font-size: x-large;
     }
 
-    label, button {
+    label, button, a {
       font-family: "Reenie Beanie", "Comic Sans", "MS Comic Sans", "Tahoma", sans-serif;
       font-size: large;
     }
     
-    button.advance_problem, button.record-check {
+    .advance_problem, .record-check {
       font-size: xx-large;
+      text-decoration: none;
       padding: .7em .4em;
       display: block;
       margin: .3em auto;
@@ -61,7 +62,7 @@ body.problems {
   }
 
   // hidden at start
-  #work-check, #dialog, #almost-done, #done {
+  #work-check, #dialog, #feedback, #done {
     display: none;
   }
 
@@ -153,7 +154,7 @@ body.problems {
     }
 
     #continue {text-align: center; margin: 1em 0 0 0;}
-    button.advance_step {font-size: x-large; padding-top: 0.3em}
+    .advance_step {font-size: x-large; padding-top: 0.3em}
   }
   
   #bookmark {
@@ -184,7 +185,7 @@ body.problems {
     text-decoration: none;
   }
  
-  #almost-done {
+  #feedback {
     p,input {margin-bottom: 0.4em}
 
     button {font-size: x-large;}

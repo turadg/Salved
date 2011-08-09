@@ -1,4 +1,6 @@
 Salved::Application.routes.draw do
+  resources :elaborations
+
   resources :problem_events
 
   resources :problems do

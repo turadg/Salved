@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Status:</b>
+  <%= @elaboration.status %>
+</p>
+
+<p>
+  <b>Difficulty:</b>
+  <%= @elaboration.difficulty %>
+</p>
+
+<p>
+  <b>Note to self:</b>
+  <%= @elaboration.note_to_self %>
+</p>
+
+<p>
+  <b>Note to instructor:</b>
+  <%= @elaboration.note_to_instructor %>
+</p>
+
+
+<%= link_to 'Edit', edit_elaboration_path(@elaboration) %> |
+<%= link_to 'Back', elaborations_path %>

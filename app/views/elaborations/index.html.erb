@@ -1,0 +1,39 @@
+<div id="elaborations"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // Blog is the app name
+    window.router = new Salved.Routers.ElaborationsRouter({elaborations: <%= @elaborations.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
+
+<h1>Listing elaborations</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Difficulty</th>
+    <th>Note to self</th>
+    <th>Note to instructor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @elaborations.each do |elaboration| %>
+  <tr>
+    <td><%= elaboration.status %></td>
+    <td><%= elaboration.difficulty %></td>
+    <td><%= elaboration.note_to_self %></td>
+    <td><%= elaboration.note_to_instructor %></td>
+    <td><%= link_to 'Show', elaboration %></td>
+    <td><%= link_to 'Edit', edit_elaboration_path(elaboration) %></td>
+    <td><%= link_to 'Destroy', elaboration, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Elaboration', new_elaboration_path %>

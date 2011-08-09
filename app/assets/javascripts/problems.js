@@ -7,19 +7,9 @@ function stepImages(dir, count) {
   return imageList;
 }
 
-function updateProblem(imageList, currentStep) {
-  path = imageList[currentStep];
+function showProblemStep(step) {
+  path = imageList[step];
   $('#work_shown').attr('src', path);
-  currentExplanation = 0;
-  incrementExplanation();
-  
-  // empty the fields
-  $('textarea').val('');
-  $("input:checkbox").removeAttr("checked");
-  $('.supplement').hide();
-  $('#write_explanation').show();
-  $('#read_explanations').hide();    
-  
 }
 
 function incrementExplanation() {
@@ -45,9 +35,9 @@ function recordEvent(name, value) {
 }    
 
 var lastJustification = "";
+var currentStep;
 
-$(function () {
-  
+function initProblemUI() {
   recordEvent('init', 'initialized');
   
   // record all button presses as id clicked
@@ -69,65 +59,41 @@ $(function () {
     $(selector).val(concatenated);
     // and record new value
     recordEvent('explanation', concatenated);
-  });
-  
-  
+  });  
   $('button.advance_problem').click(function() {
     recordEvent('advance_problem', this.id);
-  });
-  
+  });  
   $('.star-off').click(function() {
     $(this).addClass("star-on");
     recordEvent('star-on', this.id);
   });
-  
-  revealAndDiscuss = function(next_div) {
-    $('#prompt').hide();
-    $(next_div).show();
-    currentStep += 1;
-    updateProblem(imageList, currentStep);
-  };  
-  $('#work_help').click(function() {revealAndDiscuss('#dialog');});
-  $('#work_check').click(function() {revealAndDiscuss('#work-check');});
+
+  $('#work_check').click(function() {window.location.hash='/'+currentStep+'/check';});
+  $('#work_help').click(function() {window.location.hash='/'+currentStep+'/explain';});
+
   $('button.record-check').click(function() {
-    recordEvent('record-check', this.id);
-    $('#work-check').hide();
-    $('#dialog').show();
+    recordEvent('record-check', this.id); // id has their choice
+    window.location.hash = '/'+currentStep+'/explain';
   });
   
   $('button.show_prior').click(function () {
-    recordEvent('record-check', this.id);
+    recordEvent('show_prior', this.id);
     $('#write_explanation').hide();
     $('#read_explanations').show();
   });
   
   $('button#revise_explanation').click(function() {
     $('#write_explanation').show();
-    $('#read_explanations').hide();    
+    $('#read_explanations').hide();
   });
   
   $('#increment_explanation').click(incrementExplanation);
   
-  $('button.advance_step').click(function () {
-    // button recorded by earlier binding
-    $('#dialog').hide();
-    if (currentStep < stepCount) {
-      $('#prompt').show();
-    } else {
-      $('#almost-done').show();
-    }
-  });
-
   $('button.finish_problem').click(function () {
     // button recorded by earlier binding
-    $('#dialog').hide();
-    $('#almost-done').hide();
-    $('#done').show();
+    window.location.hash = '/summary';
   });
-
-  updateProblem(imageList, currentStep); // step 0, the problem statement
-  
-});
+}
 
 
 $(document).ready(function()

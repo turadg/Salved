@@ -7,9 +7,13 @@ stepCount = <%= @problem.step_count %>;
 var explanations = <%= raw explanations_for_problem(@problem).to_json %>
 
 // set up env
-currentStep = 0;
 currentExplanation = 0;
 imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageType %>");
+
+$(function() {
+  window.router = new Salved.Routers.AnswerRouter({problem: <%= @problem.to_json.html_safe -%>});
+  Backbone.history.start();
+});
 
 </script>
 
@@ -93,7 +97,7 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
       
   </div>
 
-  <div id="almost-done" class="right-box">
+  <div id="feedback" class="right-box">
     <p>Almost done…</p>
     
     <p>How hard was this problem?</p>
@@ -115,7 +119,7 @@ imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageTyp
     
   </div>
 
-  <div id="done" class="right-box">
+  <div id="summary" class="right-box">
     <p>All done.</p>
     
     <p>Your stats:</p>

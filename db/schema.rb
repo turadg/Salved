@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622212809) do
+ActiveRecord::Schema.define(:version => 20110808223509) do
+
+  create_table "elaborations", :force => true do |t|
+    t.string   "status"
+    t.integer  "difficulty"
+    t.text     "note_to_self"
+    t.text     "note_to_instructor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "problem_id"
+  end
 
   create_table "problem_events", :force => true do |t|
     t.integer  "problem_id"
