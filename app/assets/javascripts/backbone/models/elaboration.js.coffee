@@ -1,6 +1,7 @@
 class Salved.Models.Elaboration extends Backbone.Model
   paramRoot: 'elaboration'
-
+  urlRoot: '/elaborations'
+  
   defaults:
     status: null
     difficulty: null

@@ -13,6 +13,8 @@ class ProblemsController < ApplicationController
   # GET /problems/1/answer
   def answer
     @problem = Problem.find(params[:id])
+    # FIXME get the elaboration (or create it) for *current_user*
+    @elaboration = Elaboration.find(2) || Elaboration.create
 
     respond_to do |format|
       format.html # answer.html.erb

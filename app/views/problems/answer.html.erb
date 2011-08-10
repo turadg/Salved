@@ -1,19 +1,12 @@
 <script type="text/javascript" charset="utf-8">
-  
-// author the interaction through data structures
-problem_id = '<%= @problem.id %>';
-question_dir = '<%= @problem.filesPath %>';
-stepCount = <%= @problem.step_count %>;
-var explanations = <%= raw explanations_for_problem(@problem).to_json %>
 
-// set up env
+// TODO reimplement explanations through AJAX  
+var explanations = <%= raw explanations_for_problem(@problem).to_json %>
 currentExplanation = 0;
-imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageType %>");
-// start loading all the images
-imageList.forEach( function(path) { new Image().src=path } );
 
 $(function() {
-  window.router = new Salved.Routers.AnswerRouter({problem: <%= @problem.to_json.html_safe -%>});
+  window.router = new Salved.Routers.AnswerRouter({problem: <%= @problem.to_json.html_safe -%>,
+                                                  elaboration: <%= @elaboration.to_json.html_safe -%>});
   Backbone.history.start();
 });
 

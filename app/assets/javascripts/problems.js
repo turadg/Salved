@@ -1,6 +1,6 @@
 function stepImages(dir, count) {
   imageList = new Array();
-  for (i = 0; i <= stepCount; i+=1) {
+  for (i = 0; i <= count; i+=1) {
     imagePath = dir + "/step-" + i + extension;
     imageList.push(imagePath);
   }
@@ -36,9 +36,18 @@ function recordEvent(name, value) {
 
 var lastJustification = "";
 var currentStep;
+var problem_id;
 
-function initProblemUI() {
+function initProblemUI(problem) {
+  var problem_id = problem.id; // TODO confirm this doesn't require problem.get('id')
+  
   recordEvent('init', 'initialized');
+  
+  // set up env
+  imageList = stepImages(problem.get('filesPath'), problem.get('step_count'), extension=problem.get('imageType'));
+  // start loading all the images
+  imageList.forEach( function(path) { new Image().src=path; } );
+  
   
   // record all button presses as id clicked
   $('button').click(function() {  recordEvent(this.id, 'clicked'); });
