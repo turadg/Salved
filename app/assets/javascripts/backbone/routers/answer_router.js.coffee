@@ -19,10 +19,9 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     
     if step > @problem.attributes.step_count
       this.navigate('/feedback')
-    
 
   start: ->
-    this.navigate('/1/try')
+    this.try(1)
 
   try: (step) ->
     this.checkBounds(step)
