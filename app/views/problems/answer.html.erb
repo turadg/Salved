@@ -9,6 +9,8 @@ var explanations = <%= raw explanations_for_problem(@problem).to_json %>
 // set up env
 currentExplanation = 0;
 imageList = stepImages(question_dir, stepCount, extension="<%= @problem.imageType %>");
+// start loading all the images
+imageList.forEach( function(path) { new Image().src=path } );
 
 $(function() {
   window.router = new Salved.Routers.AnswerRouter({problem: <%= @problem.to_json.html_safe -%>});
