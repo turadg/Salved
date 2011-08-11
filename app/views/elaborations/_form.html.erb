@@ -1,4 +1,6 @@
 <%= form_for(@elaboration) do |f| %>
+  <h1><%= @elaboration.steps.length %></h1>
+
   <% if @elaboration.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@elaboration.errors.count, "error") %> prohibited this elaboration from being saved:</h2>
@@ -27,6 +29,14 @@
     <%= f.label :note_to_instructor %><br />
     <%= f.text_area :note_to_instructor %>
   </div>
+  
+  <%= f.fields_for :steps do |fs| %>
+  <p>
+    <%= fs.label :justification, "Justification" %> <%= fs.object.index %><br />
+    <%= fs.text_area :justification, :rows => 3 %>  
+  </p>  
+  <% end %>    
+  
   <div class="actions">
     <%= f.submit %>
   </div>

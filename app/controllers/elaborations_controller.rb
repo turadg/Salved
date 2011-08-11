@@ -35,6 +35,7 @@ class ElaborationsController < ApplicationController
   # GET /elaborations/1/edit
   def edit
     @elaboration = Elaboration.find(params[:id])
+    # debugger
   end
 
   # POST /elaborations
@@ -58,6 +59,10 @@ class ElaborationsController < ApplicationController
   def update
     @elaboration = Elaboration.find(params[:id])
 
+    # FIXME hack around Backbone storing nested models in 'modelname' instead of 'modelname_attributes'
+    # REF https://github.com/documentcloud/backbone/issues/370
+    # params[:elaboration][:steps_attributes] = params[:elaboration].delete(:steps)
+    
     respond_to do |format|
       if @elaboration.update_attributes(params[:elaboration])
         format.html { redirect_to @elaboration, notice: 'Elaboration was successfully updated.' }

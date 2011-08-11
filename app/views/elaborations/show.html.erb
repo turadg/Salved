@@ -21,5 +21,12 @@
 </p>
 
 
+<ol>  
+  <% for step in @elaboration.steps %>  
+  <li><%= step.justification %></li>  
+  <% end %>  
+</ol>  
+
+
 <%= link_to 'Edit', edit_elaboration_path(@elaboration) %> |
 <%= link_to 'Back', elaborations_path %>

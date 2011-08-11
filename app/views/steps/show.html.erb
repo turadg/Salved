@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Index:</b>
+  <%= @step.index %>
+</p>
+
+<p>
+  <b>Justification:</b>
+  <%= @step.justification %>
+</p>
+
+<p>
+  <b>Selfcheck:</b>
+  <%= @step.selfcheck %>
+</p>
+
+
+<%= link_to 'Edit', edit_elaboration_step_path(@step.elaboration, @step) %> |
+<%= link_to 'Back', elaboration_steps_path(@step.elaboration) %>

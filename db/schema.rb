@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808223509) do
+ActiveRecord::Schema.define(:version => 20110811174608) do
 
   create_table "elaborations", :force => true do |t|
     t.string   "status"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(:version => 20110808223509) do
     t.integer  "step_count"
     t.text     "explanations"
     t.string   "imageType"
+  end
+
+  create_table "steps", :force => true do |t|
+    t.integer  "elaboration_id"
+    t.integer  "index"
+    t.text     "justification"
+    t.string   "selfcheck"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "understood"
   end
 
 end

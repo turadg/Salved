@@ -1,5 +1,8 @@
 Salved::Application.routes.draw do
-  resources :elaborations
+  
+  resources :elaborations do
+    resources :steps
+  end
 
   resources :problem_events
 

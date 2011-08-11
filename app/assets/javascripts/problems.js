@@ -34,8 +34,9 @@ function recordEvent(name, value) {
   $.post('/problem_events', data);
 }    
 
+// TODO refactor this into the router
 var lastJustification = "";
-var currentStep;
+var currentStep; 
 var problem_id;
 
 function initProblemUI(problem) {
@@ -77,12 +78,13 @@ function initProblemUI(problem) {
     recordEvent('star-on', this.id);
   });
 
-  $('#work_check').click(function() {window.location.hash='/'+currentStep+'/check';});
-  $('#work_help').click(function() {window.location.hash='/'+currentStep+'/explain';});
+  $('#work_check').click(function() {window.router.navigate('/'+currentStep+'/check', true);});
+  $('#work_help').click(function() {window.router.navigate('/'+currentStep+'/check', true);});
 
   $('button.record-check').click(function() {
     recordEvent('record-check', this.id); // id has their choice
-    window.location.hash = '/'+currentStep+'/explain';
+    window.router.steps.at(currentStep).save({selfcheck: this.id});
+    window.router.navigate('/'+currentStep+'/explain', true);
   });
   
   $('button.show_prior').click(function () {
@@ -98,9 +100,23 @@ function initProblemUI(problem) {
   
   $('#increment_explanation').click(incrementExplanation);
   
+  $('.advance_step').click(function() {
+    understood = !!~this.id.indexOf('yes');
+    window.router.steps.at(currentStep).save({understood: understood});
+    window.router.navigate('/'+(++currentStep)+'/try', true);
+  });
+  
   $('button.finish_problem').click(function () {
     // button recorded by earlier binding
-    window.location.hash = '/summary';
+    attrs = {
+      difficulty: $('input:radio[name=difficulty_9pt]:checked').val(),
+      note_to_self: $('textarea[name=note_to_self]').val(),
+      note_to_instructor: $('textarea[name=note_to_instructor]').val()
+    };
+    console.log("before save", window.router.elaboration.attributes, attrs);
+    window.router.elaboration.save(attrs);
+    console.log("after save", window.router.elaboration.attributes);
+    // window.router.navigate('/summary', true);
   });
 }
 

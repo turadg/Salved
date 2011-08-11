@@ -2,6 +2,9 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
   initialize: (options) ->
     @problem = new Salved.Models.Problem(options.problem)
     @elaboration = new Salved.Models.Elaboration(options.elaboration)
+    @steps = new Salved.Collections.StepsCollection(options.steps)
+    @steps.url = @elaboration.urlRoot + '/' + @elaboration.id + '/steps'
+    
     initProblemUI(@problem)
     console.log "elaboration model url: #{@elaboration.url()}"
 
@@ -14,12 +17,12 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     ".*": "start"
 
   # redirect if step number is out of bounds
-  checkBounds: (step) ->
-    step = parseInt(step)
-    if step < 1
-      this.navigate('/1/try', true)
+  checkBounds: (stepIndex) ->
+    stepIndex = parseInt(stepIndex)
+    if stepIndex < 0
+      this.navigate('/0/try', true)
     
-    if step > @problem.attributes.step_count
+    if stepIndex >= @problem.attributes.step_count
       this.navigate('/feedback', true)
 
   # save status as current hash
@@ -38,35 +41,44 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
   start: ->
     this.navigate_on_status()
 
-  try: (step) ->
-    this.checkBounds(step)
+  try: (stepIndex) ->
+    this.checkBounds(stepIndex)
     this.update_status()
-    window.currentStep = parseInt(step)
+
+    # TODO refactor this as a bound template
+    justification = @steps.at(stepIndex).get('justification')
+    $('textarea[name=justification]').val(justification)
+
+    window.currentStep = parseInt(stepIndex)
     $('.right-box').hide()
     $('#prompt').show()
-    showProblemStep(step - 1)
-    $('#work_check').attr('href', '#/'+step+'/check')
-    $('#work_help').attr('href', '#/'+step+'/explain')
+    showProblemStep(stepIndex - 1)
+    $('#work_check').attr('href', '#/'+stepIndex+'/check')
+    $('#work_help').attr('href', '#/'+stepIndex+'/explain')
     
-  check: (step) ->
-    this.checkBounds(step)
+  check: (stepIndex) ->
+    this.checkBounds(stepIndex)
     this.update_status()
-    window.currentStep = parseInt(step)
+    
+    justification = $('textarea[name=justification]').val()
+    @steps.at(stepIndex).save({justification: justification})
+    
+    window.currentStep = parseInt(stepIndex)
     $('.right-box').hide()
     $('#work-check').show()
-    showProblemStep(step)
+    showProblemStep(stepIndex)
   
-  explain: (step) ->
-    this.checkBounds(step)
+  explain: (stepIndex) ->
+    this.checkBounds(stepIndex)
     this.update_status()
-    window.currentStep = parseInt(step)
+    window.currentStep = parseInt(stepIndex)
     $('.right-box').hide()
     $('#dialog').show()
     $('#read_explanations').hide();
-    showProblemStep(step)
+    showProblemStep(stepIndex)
     nextStep = window.currentStep + 1
-    nextHash = if nextStep > @problem.attributes.step_count then '/feedback' else '/'+nextStep+'/try'
-    $('button.advance_step').click(-> window.location.hash=nextHash)
+    nextHash = if nextStep > @problem.attributes.stepIndex_count then '/feedback' else '/'+nextStep+'/try'
+    $('button.advance_stepIndex').click(-> window.location.hash=nextHash)
 
   feedback: ->
     this.update_status()

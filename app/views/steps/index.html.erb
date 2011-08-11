@@ -1,0 +1,27 @@
+<h1>Listing steps</h1>
+
+<table>
+  <tr>
+    <th>Index</th>
+    <th>Justification</th>
+    <th>Selfcheck</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @steps.each do |step| %>
+  <tr>
+    <td><%= step.index %></td>
+    <td><%= step.justification %></td>
+    <td><%= step.selfcheck %></td>
+    <td><%= link_to 'Show', [step.elaboration, step] %></td>
+    <td><%= link_to 'Edit', edit_elaboration_step_path(step.elaboration, step) %></td>
+    <td><%= link_to 'Destroy', [step.elaboration, step], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Step', new_elaboration_step_path(@elaboration) %>
