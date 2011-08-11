@@ -21,16 +21,17 @@ gem 'jquery-rails'
 
 gem 'rails-backbone'
 
+gem 'annotate', :git => 'git://github.com/turadg/annotate_models.git'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
-  gem 'webrat'
+  gem 'webrat' # TODO replace with Capybara
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
