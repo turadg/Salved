@@ -1,16 +1,12 @@
 <script type="text/javascript" charset="utf-8">
-
-// TODO reimplement explanations through AJAX  
-var explanations = <%= raw explanations_for_problem(@problem).to_json %>
-currentExplanation = 0;
-
 $(function() {
-  window.router = new Salved.Routers.AnswerRouter({problem: <%= @problem.to_json.html_safe -%>,
-                                                  elaboration: <%= @elaboration.to_json().html_safe -%>,
-                                                  steps: <%= @elaboration.steps.to_json().html_safe -%>});
+  options = { try_solving: true, // FIXME pull try_solving from an attr of current_user
+              problem: <%= @problem.to_json.html_safe -%>,
+              elaboration: <%= @elaboration.to_json().html_safe -%>,
+              steps: <%= @elaboration.steps.to_json().html_safe -%> }
+  window.router = new Salved.Routers.AnswerRouter(options);
   Backbone.history.start();
 });
-
 </script>
 
 <div id="prototype">

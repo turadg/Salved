@@ -3,10 +3,14 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     @problem = new Salved.Models.Problem(options.problem)
     @elaboration = new Salved.Models.Elaboration(options.elaboration)
     @steps = new Salved.Collections.StepsCollection(options.steps)
-    @steps.url = @elaboration.urlRoot + '/' + @elaboration.id + '/steps'
+    @steps.url = @elaboration.urlRoot + '/' + @elaboration.id + '/steps'    
+
+    # set up env
+    @imageList = this.stepImages(@problem.get('filesPath'), @problem.get('step_count'))
+    # start loading all the images
+    (new Image()).src=path for path in @imageList
     
-    initProblemUI(@problem)
-    console.log "elaboration model url: #{@elaboration.url()}"
+    $(document).ready(-> initProblemUI(window.router.recordEvent))
 
   routes:
     "/:step/try": "try"
@@ -52,7 +56,7 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     window.currentStep = parseInt(stepIndex)
     $('.right-box').hide()
     $('#prompt').show()
-    showProblemStep(stepIndex - 1)
+    this.showProblemStep(stepIndex)
     $('#work_check').attr('href', '#/'+stepIndex+'/check')
     $('#work_help').attr('href', '#/'+stepIndex+'/explain')
     
@@ -66,7 +70,7 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     window.currentStep = parseInt(stepIndex)
     $('.right-box').hide()
     $('#work-check').show()
-    showProblemStep(stepIndex)
+    this.showProblemStep(window.currentStep+1)
   
   explain: (stepIndex) ->
     this.checkBounds(stepIndex)
@@ -75,10 +79,10 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     $('.right-box').hide()
     $('#dialog').show()
     $('#read_explanations').hide();
-    showProblemStep(stepIndex)
+    this.showProblemStep(window.currentStep+1)
     nextStep = window.currentStep + 1
-    nextHash = if nextStep > @problem.attributes.stepIndex_count then '/feedback' else '/'+nextStep+'/try'
-    $('button.advance_stepIndex').click(-> window.location.hash=nextHash)
+    nextHash = if nextStep >= @problem.get('step_count') then '/feedback' else '/'+nextStep+'/try'
+    $('button.advance_step').click(-> window.router.navigate(nextHash, true))
 
   feedback: ->
     this.update_status()
@@ -89,3 +93,29 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     this.update_status()
     $('.right-box').hide()
     $('#summary').show()
+
+
+  showProblemStep: (step) ->
+    path = @imageList[step]
+    # console.log "showing ", step, " with ", path
+    $(document).ready(-> $('#work_shown').attr('src', path) )
+
+
+
+  recordEvent: (name, value) ->
+    # common: problem_id, currentStep
+    data = {'problem_event': {
+      'problem_id': @problem.id,
+      'step': currentStep,
+      'name': name,
+      'value': value
+    }}
+    $.post('/problem_events', data)
+
+  stepImages: (imagePath, count) ->
+    # emulate Handlebars in Underscore templating
+    _.templateSettings = { interpolate : /\{\{(.+?)\}\}/g  }
+
+    template = _.template(imagePath);
+    template({stepIndex : index}) for index in [0..count]
+  

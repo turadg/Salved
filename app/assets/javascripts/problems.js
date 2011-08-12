@@ -13,13 +13,8 @@ function stepImages(imagePath, count) {
   return imageList;
 }
 
-function showProblemStep(step) {
-  path = imageList[step];
-  $('#work_shown').attr('src', path);
-}
-
 function incrementExplanation() {
-  expl = explanations[currentStep] ? explanations[currentStep][currentExplanation] : "<not available>";
+  expl = "<not available>";
   $('#prior_explanation').text(expl);
   currentExplanation += 1;
   if (explanations[currentStep] && currentExplanation >= explanations[currentStep].length) {
@@ -29,35 +24,12 @@ function incrementExplanation() {
   }
 }
 
-function recordEvent(name, value) {
-  // common: problem_id, currentStep
-  data = {'problem_event': {
-    'problem_id': problem_id,
-    'step': currentStep,
-    'name': name,
-    'value': value
-  }};
-  $.post('/problem_events', data);
-}    
 
 // TODO refactor this into the router
-var lastJustification = "";
 var currentStep; 
-var problem_id;
 
-function initProblemUI(problem) {
-  console.log("initProblemUI");
-  
-  var problem_id = problem.id; // TODO confirm this doesn't require problem.get('id')
-  
+function initProblemUI(recordEvent) {  
   recordEvent('init', 'initialized');
-  
-  // set up env
-  console.log("getting step images…");
-  imageList = stepImages(problem.get('filesPath'), problem.get('step_count'));
-  // start loading all the images
-  imageList.forEach( function(path) { new Image().src=path; } );
-  
   
   // record all button presses as id clicked
   $('button').click(function() {  recordEvent(this.id, 'clicked'); });
@@ -67,11 +39,7 @@ function initProblemUI(problem) {
   $('input').change(function() {    recordEvent(this.name, this.value);  });
   $('textarea').blur(function() {    recordEvent(this.name, this.value);  });
 
-  // save justification for explanation
-  $('textarea[name="justification"]').blur(function() {
-    lastJustification = this.value;
-  });
-  // paste it in on request
+  // FIXME reimplement pasting last justification on request
   $('#paste_justification').click(function () {
     selector = 'textarea[name="explanation"]';
     concatenated = $(selector).val() + " " + lastJustification;
@@ -88,7 +56,7 @@ function initProblemUI(problem) {
   });
 
   $('#work_check').click(function() {window.router.navigate('/'+currentStep+'/check', true);});
-  $('#work_help').click(function() {window.router.navigate('/'+currentStep+'/check', true);});
+  $('#work_help').click(function() {window.router.navigate('/'+currentStep+'/explain', true);});
 
   $('button.record-check').click(function() {
     recordEvent('record-check', this.id); // id has their choice
@@ -112,7 +80,6 @@ function initProblemUI(problem) {
   $('.advance_step').click(function() {
     understood = !!~this.id.indexOf('yes');
     window.router.steps.at(currentStep).save({understood: understood});
-    window.router.navigate('/'+(++currentStep)+'/try', true);
   });
   
   $('button.finish_problem').click(function () {
@@ -122,10 +89,8 @@ function initProblemUI(problem) {
       note_to_self: $('textarea[name=note_to_self]').val(),
       note_to_instructor: $('textarea[name=note_to_instructor]').val()
     };
-    console.log("before save", window.router.elaboration.attributes, attrs);
     window.router.elaboration.save(attrs);
-    console.log("after save", window.router.elaboration.attributes);
-    // window.router.navigate('/summary', true);
+    window.router.navigate('/summary', true);
   });
 }
 
