@@ -1,6 +1,6 @@
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  options = { try_solving: true, // FIXME pull try_solving from an attr of current_user
+  options = { student_solves: false, // FIXME pull try_solving from an attr of current_user
               problem: <%= @problem.to_json.html_safe -%>,
               elaboration: <%= @elaboration.to_json().html_safe -%>,
               steps: <%= @elaboration.steps.to_json().html_safe -%> }

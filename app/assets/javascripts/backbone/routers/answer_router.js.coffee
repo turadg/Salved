@@ -5,6 +5,8 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     @steps = new Salved.Collections.StepsCollection(options.steps)
     @steps.url = @elaboration.urlRoot + '/' + @elaboration.id + '/steps'    
 
+    @step_first = if options.student_solves then 'try' else 'explain'
+
     # set up env
     @imageList = this.stepImages(@problem.get('filesPath'), @problem.get('step_count'))
     # start loading all the images
@@ -24,7 +26,7 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
   checkBounds: (stepIndex) ->
     stepIndex = parseInt(stepIndex)
     if stepIndex < 0
-      this.navigate('/0/try', true)
+      this.navigate("/0/#{@step_first}", true)
     
     if stepIndex >= @problem.attributes.step_count
       this.navigate('/feedback', true)
@@ -46,10 +48,11 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     this.navigate_on_status()
 
   try: (stepIndex) ->
+    # TODO block this from those students?
     this.checkBounds(stepIndex)
     this.update_status()
 
-    # TODO refactor this as a bound template
+    # TODO refactor this as a bound templated view
     justification = @steps.at(stepIndex).get('justification')
     $('textarea[name=justification]').val(justification)
 
@@ -81,7 +84,7 @@ class Salved.Routers.AnswerRouter extends Backbone.Router
     $('#read_explanations').hide();
     this.showProblemStep(window.currentStep+1)
     nextStep = window.currentStep + 1
-    nextHash = if nextStep >= @problem.get('step_count') then '/feedback' else '/'+nextStep+'/try'
+    nextHash = if nextStep >= @problem.get('step_count') then '/feedback' else '/'+nextStep+"/#{@step_first}"
     $('button.advance_step').click(-> window.router.navigate(nextHash, true))
 
   feedback: ->
