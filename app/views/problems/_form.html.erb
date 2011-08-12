@@ -15,13 +15,11 @@
     <%= f.label :label %><br />
     <%= f.text_field :label %>
   </div>
+  
+  <p>(template with <tt>{{stepIndex}}</tt> like <i>https://dl.dropbox.com/s/ghum2hzpg5h6451/examN_question3/step-{{stepIndex}}.gif</i>)</p>
   <div class="field">
     <%= f.label :filesPath %><br />
     <%= f.text_field :filesPath %>
-  </div>
-  <div class="field">
-    <%= f.label :imageType %><br />
-    <%= f.select :imageType, [['GIF','.gif'],['PNG','.png']] %>
   </div>
   <div class="field">
     <%= f.label :step_count %><br />
