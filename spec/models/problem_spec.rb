@@ -22,6 +22,5 @@ end
 #  updated_at   :datetime
 #  step_count   :integer
 #  explanations :text
-#  imageType    :string(255)
 #
 

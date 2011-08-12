@@ -1,8 +1,14 @@
-function stepImages(dir, count) {
+function stepImages(imagePath, count) {
+  // emulate Handlebars in Underscore templating
+  _.templateSettings = { interpolate : /\{\{(.+?)\}\}/g  };
+  
+  template = _.template(imagePath);
+  
+  // TODO refactor this as a map from integers
   imageList = new Array();
   for (i = 0; i <= count; i+=1) {
-    imagePath = dir + "/step-" + i + extension;
-    imageList.push(imagePath);
+    fullImagePath = template({stepIndex : i});
+    imageList.push(fullImagePath);
   }
   return imageList;
 }
@@ -40,12 +46,15 @@ var currentStep;
 var problem_id;
 
 function initProblemUI(problem) {
+  console.log("initProblemUI");
+  
   var problem_id = problem.id; // TODO confirm this doesn't require problem.get('id')
   
   recordEvent('init', 'initialized');
   
   // set up env
-  imageList = stepImages(problem.get('filesPath'), problem.get('step_count'), extension=problem.get('imageType'));
+  console.log("getting step images…");
+  imageList = stepImages(problem.get('filesPath'), problem.get('step_count'));
   // start loading all the images
   imageList.forEach( function(path) { new Image().src=path; } );
   
