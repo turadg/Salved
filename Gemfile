@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '1.9.3'
 
 # for Heroku problems
 # gem 'rake', '0.8.7'
@@ -33,5 +34,4 @@ gem 'annotate', :git => 'git://github.com/turadg/annotate_models.git'
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
   gem 'webrat' # TODO replace with Capybara
-  gem 'ruby-debug19', :require => 'ruby-debug'
 end
